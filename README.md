@@ -1,0 +1,2 @@
+# EasyTrip-web
+Web application
