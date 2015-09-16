@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EasyTrip</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Easy Trip</h1>
+            <h3>Que voulez vous faire aujourd'hui ?</h3>
+            <br>
+            <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Rechercher</a>
+            <div id="formRecherche" class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="form-group col-md-offset-1  col-md-4">
+                        <label for="category">Choisir une categorie</label>
+                        <select size="1" id="category" name="category" class="form-control">
+                            <option Selected >---</option>
+                            <option value="idCategory">Sport Extrème</option>
+                            <option>Détente</option>
+                            <option>Plage</option>
+                            <option>Montagne</option>
+                            <option>Montagne</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset-1 col-md-4">
+                        <label for="activity">Choisir ce que vous souahitez faire </label>
+                         <select  multiple class="form-control" id="activity" name="activity" style="height:50px;">
+                        </select>
+                    </div>
+                     
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset-1  col-md-4">
+                        <label for="city">Choisir un lieu de départ</label>
+                        <input type="text" id="city" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-4 col-md-offset-1">
+                        <label for="Hours">Choisir le nombre d'heure de trajet</label>
+                        <div class="nstSlider" data-range_min="0" data-range_max="10" data-cur_min="10">
+                             <div class="leftGrip"></div>
+                        </div>
+                        <div class="leftLabel" />
+                    </div>
+                </div>
+                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-3x"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ------------------ JavaScript--------------------- -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.nstSlider.js"></script>
+    
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+
+        // show search form on click btnDisplayFrom
+        $('#btnDisplayForm').click(function (){
+            $('#formRecherche').show(200);
+            $('#btnDisplayForm').hide();
+        });
+
+        // show activity when category choise
+        $('#category').change(function(){
+            var list = ['(all)','jetSki', 'truc' , 'muche'];
+            $.each(list, function (id,item) {
+                $('#activity').append($('<option>', {text : item}));
+            });
+        });
+
+        // Slider de la durée
+        $('.nstSlider').nstSlider({ "left_grip_selector": ".leftGrip",
+            "value_changed_callback": function(cause, leftValue, rightValue) { 
+                if(leftValue == 0) {
+                     $(this).parent().find('.leftLabel').text(30 + " Mins");
+                }
+                else {
+                     $(this).parent().find('.leftLabel').text(leftValue + " Heures");
+                }
+            }   
+    });
+
+    </script>
+</body>
+
+</html>
