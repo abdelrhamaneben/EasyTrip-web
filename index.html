@@ -92,10 +92,9 @@
                 </div>
              </div>   
                 <!-- Filter Options-->
-<!--            class="col-md-8 col-md-offset-2"-->
             <div href="#" id="filterOptions">
                     <div class="row">   
-                        <div class="form-group col-md-offset-1  col-md-2">
+                        <div class="form-group col-md-offset-0  col-md-2">
                             <label for="Budget">Budget: (min)</label>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
@@ -109,20 +108,28 @@
                                 <input type="text"  id="maxBudget"> 
                             </div>
                         </div>
-                    </div>                
-                    <div class="row" >
+                        
                         <div class="form-group col-md-offset-1  col-md-2">
-                            <p>Date: <input type="text" id="dateStart"></p>
-                            
+                            <label for="dateStar"> From </label>
+                            <div class="input-group">                                
+                                <input type="text" id="dateStart">
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
                         </div>                        
                         <div class="form-group col-md-offset-1  col-md-2">
-                            <p>Date: <input type="text" id="dateEnd" ></p>
+                            <label for="dateEnd"> To </label>
+                            <div class="input-group">  
+                                <input type="text" id="dateEnd" >
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
+                            
                         </div>
+                    </div>                
+                    <div class="row" >
+                        
                     </div>
-            </div> 
-            
-        </div>  
-     
+            </div>             
+        </div>      
         
         </div>
     </header>
@@ -180,22 +187,16 @@
             $('#filterOptions').hide();
         });
         
-        $( "#dateStart" ).datepicker();
-        $( "#dateEnd" ).datepicker();
+        //Dates
+        $( "#dateStart" ).datepicker({
+            minDate: 0,
+            onSelect: function (dateText, inst) {
+                var date = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+                $("#dateEnd").datepicker("option", "minDate", date);
+            }
+        });     
         
-        // Date Ranges
-//        $(function () {
-//            $('#datetimepicker6').datetimepicker();
-//            $('#datetimepicker7').datetimepicker({
-//                useCurrent: false //Important! See issue #1075
-//            });
-//            $("#datetimepicker6").on("dp.change", function (e) {
-//                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-//            });
-//            $("#datetimepicker7").on("dp.change", function (e) {
-//                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-//            });
-//        });
+        $( "#dateEnd" ).datepicker();        
 
     </script>
 </body>
