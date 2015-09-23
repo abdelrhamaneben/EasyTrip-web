@@ -16,9 +16,10 @@
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
+    
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,7 +35,7 @@
     
     <!-- Header -->
     <header id="top" class="header">
-        <div class="text-vertical-center">
+        <div class="text-vertical-center" id="title">
             <h1>Easy Trip</h1>
             <h3>Que voulez vous faire aujourd'hui ?</h3>
             <br>
@@ -76,6 +77,76 @@
             </div>
         </div>
     </header>
+    <section id="results" style="display:none;" >
+        <span class="col-md-offset-2">20 results Page 1/20</span>  <span class="col-md-offset-6">Order by: Price / <strong>Distance</strong></span>
+        <br><br>
+        <table class="table table-hover table-responsive col-md-6">
+            <tr>
+                <td>
+                    <img class="col-md-offset-1"  src="img/sao-beach.jpg"/>
+                </td>
+                <td>
+                    <ul>
+                        <li><h3>Activity 1<h3></li>
+                        <li>Company Name</li>
+                        <li>xxxxx €</li>
+                        <li><i class="fa fa-car"></i> 1H 15</li>
+                    </ul>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary btn-lg" value="Détails" />
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <img class="col-md-offset-1"  src="img/dinh-cau-rock-cua-temple.jpg"/>
+                </td>
+                <td>
+                    <ul>
+                        <li><h3>Activity 2<h3></li>
+                        <li>Company Name</li>
+                        <li>xxxxx €</li>
+                        <li><i class="fa fa-car"></i> 1H 15</li>
+                    </ul>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary btn-lg" value="Détails" />
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <img class="col-md-offset-1"  src="img/sao-beach.jpg"/>
+                </td>
+                <td>
+                    <ul>
+                        <li><h3>Activity 3<h3></li>
+                        <li>Company Name</li>
+                        <li>xxxxx €</li>
+                        <li><i class="fa fa-car"></i> 1H 15</li>
+                    </ul>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary btn-lg" value="Détails" />
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <img class="col-md-offset-1"  src="img/dinh-cau-rock-cua-temple.jpg"/>
+                </td>
+                <td>
+                    <ul>
+                        <li><h3>Activity 4<h3></li>
+                        <li>Company Name</li>
+                        <li>xxxxx €</li>
+                        <li><i class="fa fa-car"></i> 1H 15</li>
+                    </ul>
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary btn-lg" value="Détails" />
+                </td>
+            </tr>
+        </table>
+    </section>
 
     <!-- ------------------ JavaScript--------------------- -->
     <!-- jQuery -->
@@ -84,35 +155,10 @@
     
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <script>
 
-        // show search form on click btnDisplayFrom
-        $('#btnDisplayForm').click(function (){
-            $('#formRecherche').show(200);
-            $('#btnDisplayForm').hide();
-        });
+    <!-- Script APP -->
+    <script src="js/init.js"></script>
 
-        // show activity when category choise
-        $('#category').change(function(){
-            var list = ['(all)','jetSki', 'truc' , 'muche'];
-            $.each(list, function (id,item) {
-                $('#activity').append($('<option>', {text : item}));
-            });
-        });
-
-        // Slider de la durée
-        $('.nstSlider').nstSlider({ "left_grip_selector": ".leftGrip",
-            "value_changed_callback": function(cause, leftValue, rightValue) { 
-                if(leftValue == 0) {
-                     $(this).parent().find('.leftLabel').text(30 + " Mins");
-                }
-                else {
-                     $(this).parent().find('.leftLabel').text(leftValue + " Heures");
-                }
-            }   
-    });
-
-    </script>
 </body>
 
 </html>

@@ -110,7 +110,29 @@ footer {
     padding: 100px 0;
 }
 
+/* Results  */
+#results {
+  margin-top:30px;
+}
 
+#results img {
+  width:200px;
+  height:200px;
+}
+
+#results td {
+  width:33%;
+}
+
+#results ul {
+   list-style-type: none;
+}
+
+#results .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 /* SLIDER */
 
 .is_clickable {
