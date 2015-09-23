@@ -17,6 +17,8 @@
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
     
+    <!--    Jquery-->
+    <link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">    
 
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -37,13 +39,13 @@
     <header id="top" class="header">
         <div class="text-vertical-center" id="title">
             <h1>Easy Trip</h1>
-            <h3>Que voulez vous faire aujourd'hui ?</h3>
+            <h3>What do you want to do today ?</h3>
             <br>
-            <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Rechercher</a>
+            <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Search</a>
             <div id="formRecherche" class="col-md-8 col-md-offset-2">
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
-                        <label for="category">Choisir une categorie</label>
+                        <label for="category">Category</label>
                         <select size="1" id="category" name="category" class="form-control">
                             <option Selected >---</option>
                             <option value="idCategory">Sport Extrème</option>
@@ -54,7 +56,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-offset-1 col-md-4">
-                        <label for="activity">Choisir ce que vous souahitez faire </label>
+                        <label for="activity">Activity </label>
                          <select  multiple class="form-control" id="activity" name="activity" style="height:50px;">
                         </select>
                     </div>
@@ -62,19 +64,71 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
-                        <label for="city">Choisir un lieu de départ</label>
+                        <label for="city">Departure</label>
                         <input type="text" id="city" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4 col-md-offset-1">
-                        <label for="Hours">Choisir le nombre d'heure de trajet</label>
+                        <label for="Hours">Select </label>
                         <div class="nstSlider" data-range_min="0" data-range_max="10" data-cur_min="10">
                              <div class="leftGrip"></div>
                         </div>
                         <div class="leftLabel" />
                     </div>
                 </div>
-                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-3x"></i>
-            </div>
+                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-3x"></i>    
+                
+                <!-- BtnFilter -->
+                <div class="row">    
+                    <div class="form-group col-md-offset-9  col-md-4">
+                        <a href="#" id="btnDisplayFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-down"></span> Filter
+                        </a>
+                        <a href="#" id="btnHideFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-up"></span> Filter
+                        </a>
+                    </div>
+                </div>
+             </div>   
+                <!-- Filter Options-->
+            <div href="#" id="filterOptions">
+                    <div class="row">   
+                        <div class="form-group col-md-offset-0  col-md-2">
+                            <label for="Budget">Budget: (min)</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" id="minBudget">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="Budget"> (max) </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text"  id="maxBudget"> 
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="dateStar"> From </label>
+                            <div class="input-group">                                
+                                <input type="text" id="dateStart">
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>                        
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="dateEnd"> To </label>
+                            <div class="input-group">  
+                                <input type="text" id="dateEnd" >
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
+                            
+                        </div>
+                    </div>                
+                    <div class="row" >
+                        
+                    </div>
+            </div>             
+        </div>      
+        
         </div>
     </header>
     <section id="results" style="display:none;" >
@@ -152,12 +206,70 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/jquery.nstSlider.js"></script>
+    <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
     
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Script APP -->
     <script src="js/init.js"></script>
+
+    <script>
+        // show search form on click btnDisplayFrom
+        $('#btnDisplayForm').click(function (){
+            $('#formRecherche').show(200);
+            $('#btnDisplayForm').hide();
+            $('#btnHideFilter').hide();
+            $('#filterOptions').hide();
+        });
+
+        // show activity when category choise
+        $('#category').change(function(){
+            var list = ['(all)','jetSki', 'truc' , 'muche'];
+            $.each(list, function (id,item) {
+                $('#activity').append($('<option>', {text : item}));
+            });
+        });
+
+        // Slider de la durée
+        $('.nstSlider').nstSlider({ "left_grip_selector": ".leftGrip",
+            "value_changed_callback": function(cause, leftValue, rightValue) { 
+                if(leftValue == 0) {
+                     $(this).parent().find('.leftLabel').text(30 + " Mins");
+                }
+                else {
+                     $(this).parent().find('.leftLabel').text(leftValue + " Hours");
+                }
+            }   
+        });
+        
+        // show filters form on click btnDisplayFilter
+        $('#btnDisplayFilter').click(function (){                        
+            $('#btnHideFilter').show();
+            $('#btnDisplayFilter').hide();
+            $('#filterOptions').show();
+
+        });
+        
+        // show filters form on click btnDisplayFilter
+        $('#btnHideFilter').click(function (){                        
+            $('#btnDisplayFilter').show();
+            $('#btnHideFilter').hide();
+            $('#filterOptions').hide();
+        });
+        
+        //Dates
+        $( "#dateStart" ).datepicker({
+            minDate: 0,
+            onSelect: function (dateText, inst) {
+                var date = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+                $("#dateEnd").datepicker("option", "minDate", date);
+            }
+        });     
+        
+        $( "#dateEnd" ).datepicker();        
+    
+    </script>
 
 </body>
 
