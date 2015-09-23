@@ -16,21 +16,19 @@
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/structure.css"/>
+    <link rel="stylesheet" href="css/angucomplete.css"/>
+
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- link rel="stylesheet" href="fonts/bariol/bariol.css"/ -->
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
-<body>
+<body ng-app="app">
     
     <!-- Header -->
     <header id="top" class="header">
@@ -39,30 +37,22 @@
             <h3>Que voulez vous faire aujourd'hui ?</h3>
             <br>
             <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Rechercher</a>
-            <div id="formRecherche" class="col-md-8 col-md-offset-2">
+            <div id="formRecherche" class="col-md-8 col-md-offset-2" ng-controller="MainController">
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
-                        <label for="category">Choisir une categorie</label>
-                        <select size="1" id="category" name="category" class="form-control">
-                            <option Selected >---</option>
-                            <option value="idCategory">Sport Extrème</option>
-                            <option>Détente</option>
-                            <option>Plage</option>
-                            <option>Montagne</option>
-                            <option>Montagne</option>
-                        </select>
+                            <angucomplete id="ex1" placeholder="Choisir une categorie" pause="100" selectedobject="selected" localdata="activities" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
                     </div>
                     <div class="form-group col-md-offset-1 col-md-4">
-                        <label for="activity">Choisir ce que vous souahitez faire </label>
-                         <select  multiple class="form-control" id="activity" name="activity" style="height:50px;">
-                        </select>
+                        <div class="" ng-show="selected">
+                            <label for="activity">Choisir ce que vous souahitez faire</label>
+                            <select  ng-model="selectedActivity" multiple class="form-control" style="height:50px;" ng-options="o as o for o in selected.originalObject.activity">
+                            </select>
+                        </div>
                     </div>
-                     
-                </div>
+                 </div>     
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
-                        <label for="city">Choisir un lieu de départ</label>
-                        <input type="text" id="city" class="form-control"/>
+                        <angucomplete id="ex2" placeholder="Choisir un lieu de départ" pause="100" selectedobject="selectedCity" localdata="cities" searchfields="city" titlefield="city" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
                     </div>
                     <div class="form-group col-md-4 col-md-offset-1">
                         <label for="Hours">Choisir le nombre d'heure de trajet</label>
@@ -72,12 +62,24 @@
                         <div class="leftLabel" />
                     </div>
                 </div>
-                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-3x"></i>
+                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-2x"></i>
             </div>
         </div>
     </header>
 
     <!-- ------------------ JavaScript--------------------- -->
+
+    <!-- AngularJS & autocomplet -->
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="js/app/directives/angucomplete.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/app/controllers/main-controller.js"></script>
+
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/jquery.nstSlider.js"></script>
@@ -90,14 +92,6 @@
         $('#btnDisplayForm').click(function (){
             $('#formRecherche').show(200);
             $('#btnDisplayForm').hide();
-        });
-
-        // show activity when category choise
-        $('#category').change(function(){
-            var list = ['(all)','jetSki', 'truc' , 'muche'];
-            $.each(list, function (id,item) {
-                $('#activity').append($('<option>', {text : item}));
-            });
         });
 
         // Slider de la durée
