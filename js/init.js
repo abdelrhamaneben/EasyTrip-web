@@ -36,5 +36,6 @@ $('.nstSlider').nstSlider({ "left_grip_selector": ".leftGrip",
         else {
              $(this).parent().find('.leftLabel').text(leftValue + " Heures");
         }
-    }
+    }   
 });
+

@@ -21,18 +21,22 @@ var services = {
 			}
 			template += this.TableBottom;
 			return template;
-
 		}
 		else {
 			throw "Services Object Function Build : Expected Json data";
 		}
 	},
 
-	// Call display Detail
+	// Call display Details
+    //css: { top: '10px', left: '', right: '10px' } 
+    //centerX: 0
 	Feature: function (idService) {
 		var service = this.FindById(idService);
-		// TODO
-		alert("TODO");
+        $.blockUI({ 
+            message: $('#details'), 
+            css: { width:    '60%' }
+        }); 
+	   setTimeout($.unblockUI, 2000);
 	},
 
 	FindById: function (idService) {
@@ -43,7 +47,6 @@ var services = {
 					return item;
 				}
 			}
-
 		}
 		else {
 			throw "Services Object Function Build : Expected Json data";
