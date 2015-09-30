@@ -28,15 +28,13 @@ var services = {
 	},
 
 	// Call display Details
-    //css: { top: '10px', left: '', right: '10px' } 
-    //centerX: 0
 	Feature: function (idService) {
 		var service = this.FindById(idService);
         $.blockUI({ 
             message: $('#details'), 
-            css: { width:    '60%' }
+            css: { top: '5%', left: '20%', width:'55%' }
         }); 
-	   setTimeout($.unblockUI, 2000);
+        $('.blockOverlay').attr('title','Click to unblock').click($.unblockUI); 
 	},
 
 	FindById: function (idService) {
