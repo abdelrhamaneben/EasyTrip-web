@@ -16,12 +16,17 @@
 
     <!-- Custom CSS -->
     <link href="css/stylish-portfolio.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/structure.css"/>
     <link rel="stylesheet" href="css/angucomplete.css"/>
 
+    
+    <!--    Jquery-->
+    <link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">    
+
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <!-- link rel="stylesheet" href="fonts/bariol/bariol.css"/ -->
 
@@ -32,20 +37,20 @@
     
     <!-- Header -->
     <header id="top" class="header">
-        <div class="text-vertical-center">
+        <div class="text-vertical-center" id="title">
             <h1>Easy Trip</h1>
-            <h3>Que voulez vous faire aujourd'hui ?</h3>
+            <h3>What do you want to do today ?</h3>
             <br>
-            <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Rechercher</a>
+            <a href="#" id="btnDisplayForm" class="btn btn-dark btn-lg">Search</a>
             <div id="formRecherche" class="col-md-8 col-md-offset-2" ng-controller="MainController">
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
                             <label for="category">Category</label>
-                            <angucomplete id="ex1" placeholder="Choisir une categorie" pause="100" selectedobject="selected" localdata="activities" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
+                            <angucomplete id="ex1" placeholder="Select a category" pause="100" selectedobject="selected" localdata="activities" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
                     </div>
                     <div class="form-group col-md-offset-1 col-md-4">
                         <div class="" ng-show="selected">
-                            <label for="activity">Choisir ce que vous souahitez faire</label>
+                            <label for="activity">Activity</label>
                             <select  ng-model="selectedActivity" multiple class="form-control" style="height:50px;" ng-options="o as o for o in selected.originalObject.activity">
                             </select>
                         </div>
@@ -53,20 +58,115 @@
                  </div>     
                 <div class="row">
                     <div class="form-group col-md-offset-1  col-md-4">
-                        <angucomplete id="ex2" placeholder="Choisir un lieu de départ" pause="100" selectedobject="selectedCity" localdata="cities" searchfields="city" titlefield="city" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
+                        <label for="city">Departure</label>
+                        <angucomplete id="ex2" placeholder="Departure" pause="100" selectedobject="selectedCity" localdata="cities" searchfields="city" titlefield="city" minlength="1" inputclass="form-control form-control-small" matchclass=" highlight" />
+
                     </div>
                     <div class="form-group col-md-4 col-md-offset-1">
-                        <label for="Hours">Choisir le nombre d'heure de trajet</label>
+                        <label for="Hours">Select </label>
                         <div class="nstSlider" data-range_min="0" data-range_max="10" data-cur_min="10">
                              <div class="leftGrip"></div>
                         </div>
                         <div class="leftLabel" />
                     </div>
                 </div>
-                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-2x"></i>
-            </div>
+                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-2x"></i>    
+                
+                <!-- BtnFilter -->
+                <div class="row">    
+                    <div class="form-group col-md-offset-9  col-md-4">
+                        <a href="#" id="btnDisplayFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-down"></span> Filter
+                        </a>
+                        <a href="#" id="btnHideFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-up"></span> Filter
+                        </a>
+                    </div>
+                </div>
+             </div>   
+                <!-- Filter Options-->
+            <div href="#" id="filterOptions">
+                    <div class="row">   
+                        <div class="form-group col-md-offset-0  col-md-2">
+                            <label for="Budget">Budget: (min)</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" id="minBudget">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="Budget"> (max) </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text"  id="maxBudget"> 
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="dateStar"> From </label>
+                            <div class="input-group">                                
+                                <input type="text" id="dateStart">
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>                        
+                        <div class="form-group col-md-offset-1  col-md-2">
+                            <label for="dateEnd"> To </label>
+                            <div class="input-group">  
+                                <input type="text" id="dateEnd" >
+                                <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            </div>
+                            
+                        </div>
+                    </div>   
+            </div>             
+        </div>      
+        
+
         </div>
     </header>
+    
+    <!-- Results -->
+    <section id="results" style="display:none;" >  
+        
+    </section>
+    
+    <!--    Details-->
+    <div style="display: none;" id="details">
+        <div class="row">  
+            <div class="form-group col-md-offset-1  col-md-4">
+                <h3 id="activity">Activity</h3>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="form-group col-md-offset-1  col-md-1">
+                <img id="picture" src="img/sao-beach.jpg" width="304" height="236" />
+            </div>
+            <div class="form-group col-md-offset-4  col-md-4">
+                <h4 id="company">Company</h4>
+                <h5 id="description">Description from activity</h5>
+                <h4 id="price">$ xxx.</h4>
+            </div>
+            <div class="form-group col-md-offset-4  col-md-4">
+                <h5 id="range">Range</h5>
+                <h5 id="adress">Adress from activity</h5>
+                <h5 id="telephone">01.26.26.85.85</h5>
+                <h5 id="email">email@email.com</h5>
+            </div>
+        </div>  
+        <div class="row">  
+            <div class="form-group col-md-offset-1  col-md-4">
+                <h4 id="activity">Directions</h4>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="form-group col-md-offset-1  col-md-1">
+                <img id="picture" src="img/default.png" width="304" height="236" />                               
+            </div>
+            <div class="form-group col-md-offset-4  col-md-4">
+                <h5 id="adressDetails">Adress details from activity</h5>
+            </div>
+        </div>
+	</div>    
 
     <!-- ------------------ JavaScript--------------------- -->
 
@@ -84,15 +184,27 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="js/jquery.nstSlider.js"></script>
-    
+    <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="js/jquery.blockUI.js"></script>
+
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <script>
 
+    <!-- Script APP -->
+    <script src="js/init.js"></script>
+    <!-- Services Table Manager-->
+    <script src="js/services.js"></script>
+    <!-- Json Example source-->
+    <script src="js/JsonServices.js"></script>
+
+    <script>
         // show search form on click btnDisplayFrom
         $('#btnDisplayForm').click(function (){
             $('#formRecherche').show(200);
             $('#btnDisplayForm').hide();
+            $('#btnHideFilter').hide();
+            $('#filterOptions').hide();
+	    $('#MenuActivity').hide();
         });
 
         // Slider de la durée
@@ -102,12 +214,41 @@
                      $(this).parent().find('.leftLabel').text(30 + " Mins");
                 }
                 else {
-                     $(this).parent().find('.leftLabel').text(leftValue + " Heures");
+                     $(this).parent().find('.leftLabel').text(leftValue + " Hours");
                 }
             }   
-    });
+        });
+        
+        // show filters form on click btnDisplayFilter
+        $('#btnDisplayFilter').click(function (){                        
+            $('#btnHideFilter').show();
+            $('#btnDisplayFilter').hide();
+            $('#filterOptions').show();
 
+        });
+        
+        // show filters form on click btnDisplayFilter
+        $('#btnHideFilter').click(function (){                        
+            $('#btnDisplayFilter').show();
+            $('#btnHideFilter').hide();
+            $('#filterOptions').hide();
+        });
+        
+        //Dates
+        $( "#dateStart" ).datepicker({
+            minDate: 0,
+            onSelect: function (dateText, inst) {
+                var date = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateText);
+                $("#dateEnd").datepicker("option", "minDate", date);
+            }
+        });     
+        
+        $( "#dateEnd" ).datepicker();        
+    
+        
+        
     </script>
+
 </body>
 
 </html>

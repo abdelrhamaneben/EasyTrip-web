@@ -2,6 +2,7 @@ html {
     height: 100%;
 }
 
+/*
 body {
     font-family: "bariol_regularregular", Arial;
     letter-spacing: 0.01em;
@@ -12,6 +13,7 @@ body {
     margin: 0px;
     height: 100%;
 }
+*/
 
 input, button, textarea {
     -webkit-appearance: none;
@@ -212,6 +214,7 @@ h1 {
 }
 
 /* Buttons */
+/*
 .btn {
     border-style: none;
     font-size: 14px;
@@ -223,7 +226,9 @@ h1 {
     cursor: pointer;
     min-width: 100px;
 }
+*/
 
+/*
 .btn-slim {
     min-width: 50px;
 }
@@ -251,6 +256,7 @@ h1 {
     background-color: #FFA300;
     color: #ffffff;
 }
+*/
 
 .dropdown-description {
     display: none;
