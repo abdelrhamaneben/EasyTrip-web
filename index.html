@@ -52,10 +52,9 @@
                             <option>Détente</option>
                             <option>Plage</option>
                             <option>Montagne</option>
-                            <option>Montagne</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-offset-1 col-md-4">
+                    <div class="form-group col-md-offset-1 col-md-4" id="MenuActivity">
                         <label for="activity">Activity </label>
                          <select  multiple class="form-control" id="activity" name="activity" style="height:50px;">
                         </select>
@@ -199,14 +198,17 @@
             $('#btnDisplayForm').hide();
             $('#btnHideFilter').hide();
             $('#filterOptions').hide();
+	    $('#MenuActivity').hide();
         });
 
         // show activity when category choise
         $('#category').change(function(){
             var list = ['(all)','jetSki', 'truc' , 'muche'];
+	    $('#activity option').remove();
             $.each(list, function (id,item) {
                 $('#activity').append($('<option>', {text : item}));
             });
+	     $('#MenuActivity').show();
         });
 
         // Slider de la durée
