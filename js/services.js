@@ -4,7 +4,7 @@ var services = {
 	TableBottom: "</table>",
 	data: null,
 
-	//This function build the result table, she need the list of Json service in services.data property
+	//This function build the result table, it needs the list of Json service in services.data property
 	Build: function () {
 		if(this.data != null) {
 			var template = this.TableTop;
