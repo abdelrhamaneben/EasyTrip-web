@@ -15,7 +15,8 @@ body {
 }
 */
 
-input, button, textarea {
+/*input,*/
+button, textarea {
     -webkit-appearance: none;
 }
 
