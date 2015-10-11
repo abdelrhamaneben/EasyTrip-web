@@ -1,0 +1,43 @@
+        <div ng-app="app">    
+            <div id="formRecherche" class="col-md-8 col-md-offset-2" ng-controller="MainController">
+                <div class="row">
+                    <div class="form-group col-md-offset-1  col-md-4">
+                            <label for="category">Category</label><br>
+                            <select class="selectpicker" ng-model="Category" ng-options="category.name for category in categories">
+                                <option value="">-- Choose category --</option>
+                            </select>
+                    </div>
+                    <div class="form-group col-md-offset-1 col-md-4">
+                            <label for="activity">Activity</label>
+                            <select  ng-model="selectedActivity" multiple class="form-control" style="height:50px;" ng-options="o as o for o in Category.activity">
+                            </select>
+                    </div>
+                 </div>     
+                <div class="row">
+                    <div class="form-group col-md-offset-1  col-md-4">
+                        <label for="city">Departure</label>
+			<input id="city" placeholder="Enter your address" onFocus="geolocate()" type="text">
+                    </div>
+                    <div class="form-group col-md-4 col-md-offset-1">
+                        <label for="Hours">Select </label>
+                        <div class="nstSlider" data-range_min="0" data-range_max="10" data-cur_min="10">
+                             <div class="leftGrip"></div>
+                        </div>
+                        <div class="leftLabel" />
+                    </div>
+                </div>
+                <i  id="btnSearch" class="btn btn-dark fa fa-search fa-2x"></i>    
+                
+                <!-- BtnFilter -->
+                <div class="row">    
+                    <div class="form-group col-md-offset-9  col-md-4">
+                        <a href="#" id="btnDisplayFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-down"></span> Filter
+                        </a>
+                        <a href="#" id="btnHideFilter" class="btn btn-dark btn-xs">
+                            <span class="glyphicon glyphicon-menu-up"></span> Filter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
