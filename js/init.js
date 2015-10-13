@@ -41,36 +41,35 @@ $('#categories').change(function (){
 
 // Button research / display result and reduce search bar
 $('#btnSearch').click(function() {
-    if(mode_result == false) {
-        $('#top').css('height','70%');
-    }
     var location = $('#city').val();
     var activities = $('#activities').val();
+    if(location && activities) {
     $.ajax({
-       url : 'http://localhost:1337/service/search', 
-       type : 'GET', 
-       data : {'location' : location, 'activities' : activities},
-       success : function (data) {
-            mode_result = true;
-            services.data = data;
-            console.log(data);
-            if(data != null) {
-                 var results = services.Build();
-                $('#results').html(results);
-                $('#results').show();
-                window.location.hash = "results";
-            }
-            else {
-                alert("Aucun service trouvé pour votre recherche");
-            }
-       },
-       error : function (data) {
-        alert(data.responseText);
-       }
-    });
-
-
-    
+           url : 'http://localhost:1337/service/search', 
+           type : 'GET', 
+           data : {'location' : location, 'activities' : activities},
+           success : function (data) {
+                if(mode_result == false) {
+                        $('#top').css('height','70%');
+                }
+                mode_result = true;
+                if(data.length > 0) {
+                    services.data = data;
+                    var results = services.Build();
+                    $('#results').html(results);
+                    $('#results').show();
+                    window.location.hash = "results";
+                }
+                else {
+                    $('#results').html("<center><h3>Aucun de service trouvé</h3></center>");
+                    $('#results').show();
+                }
+           },
+           error : function (data) {
+            alert("Oups !!");
+           }
+        });
+    }
 });
 
 // Slider de la durée
