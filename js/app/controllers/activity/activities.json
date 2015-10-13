@@ -1,7 +1,0 @@
-[
-      {"name": "Sea", "activity": ["Swimming","jetski"]},
-      {"name": "Mountain", "activity": ["Climbing","ski"]},
-      {"name": "Tourism", "activity": ["Musumes","nature","public plances"]},
-      {"name": "Adventures", "activity": ["Attration park","free jump"]},
-      {"name": "Relax", "activity": ["Nothing"]}
-]

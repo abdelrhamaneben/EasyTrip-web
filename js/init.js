@@ -6,12 +6,37 @@ $('#btnDisplayForm').click(function (){
     $('#btnDisplayForm').hide();
 });
 
-// show activity when category choise
-$('#category').change(function(){
-    var list = ['(all)','jetSki', 'truc' , 'muche'];
-    $.each(list, function (id,item) {
-        $('#activity').append($('<option>', {text : item}));
-    });
+// display every categories
+$.ajax({
+   url : 'http://localhost:1337/category', 
+   type : 'GET',
+   success : function (data) {
+    $.each(data,function (i,c) {
+        $('#categories').append($('<option>', {
+            value: c.id_category,
+            text: c.name
+        }));
+    })
+   }
+});
+
+$('#categories').change(function (){
+    var cat = $('#categories').val();
+    $('#activities').html('');
+    if(cat != "none") {
+        $.ajax({
+           url : 'http://localhost:1337/category/' + cat,
+           type : 'GET',
+           success : function (data) {
+            $.each(data.activities, function (i,a) {
+                $('#activities').append($('<option>', {
+                    value: a.id_activity,
+                    text: a.name
+                }));
+            });
+           }
+        });
+    }
 });
 
 // Button research / display result and reduce search bar
@@ -19,12 +44,33 @@ $('#btnSearch').click(function() {
     if(mode_result == false) {
         $('#top').css('height','70%');
     }
-    mode_result = true;
-    services.data = serviceJson.services;
-    var results = services.Build();
-     $('#results').html(results);
-    $('#results').show();
-    window.location.hash = "results";
+    var location = $('#city').val();
+    var activities = $('#activities').val();
+    $.ajax({
+       url : 'http://localhost:1337/service/search', 
+       type : 'GET', 
+       data : {'location' : location, 'activities' : activities},
+       success : function (data) {
+            mode_result = true;
+            services.data = data;
+            console.log(data);
+            if(data != null) {
+                 var results = services.Build();
+                $('#results').html(results);
+                $('#results').show();
+                window.location.hash = "results";
+            }
+            else {
+                alert("Aucun service trouvé pour votre recherche");
+            }
+       },
+       error : function (data) {
+        alert(data.responseText);
+       }
+    });
+
+
+    
 });
 
 // Slider de la durée
