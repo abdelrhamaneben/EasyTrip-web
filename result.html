@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>EasyTiip</title>
-
+    <meta charset="utf8" />
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -40,11 +40,11 @@
             </ul>
         </section>
         <!-- Center part (List of services) -->
-        <section id="c-part"class="col-md-5 col-xs-12" style="padding-top:150px;">
-           <div class="text-center">
+        <section id="c-part"class="col-md-5 col-xs-12" style="overflow-y : scroll;height:100%;">
+          <!-- <div class="text-center">
                 <h5>Chargement des services ...</h5>
                 <i class="fa fa-spinner fa-spin fa-3x"></i>
-            </div>
+            </div>-->
         </section>
         <!-- Left part (Google map)  -->
         <section id="r-part"class="col-md-5 col-xs-12">
@@ -59,6 +59,7 @@
     <script src="js/models/service.js"></script>
     <script src="js/models/map_manager.js"></script>
     <script src="js/models/activities_manager.js"></script>
+    <script src="js/models/services_manager.js"></script>
     <script type="text/javascript">
        function initialize() {
             // initialize Google Map and add marker
@@ -66,8 +67,11 @@
             map_manager.addMarker({latitude : 50.6232523, longitude : 3.144265099999984, name : "sdsc"});
             map_manager.addMarker({latitude : 50.654836, longitude : 3.073511000000053, name : "blablablabla"});
             map_manager.resize();
-            map_manager.clickOnMarker = function (service) { alert(service.name);};
-
+            map_manager.clickOnMarker = function (service) { 
+                console.log(this.map.getZoom());
+                alert(service.name);
+            };
+            services_manager.build();
             // initialize List of Activities
             $.ajax({
               method: "GET",

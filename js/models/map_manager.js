@@ -13,6 +13,8 @@ var map_manager = {
         	center: new google.maps.LatLng(longitude, latitude),
         	mapTypeId: google.maps.MapTypeId.ROADMAP
     	});
+
+    	console.log(this.map.getZoom());
 	},
 	// this function add a marker to google map
 	addMarker: function (service) {
@@ -43,6 +45,17 @@ var map_manager = {
 			bounds.extend(new google.maps.LatLng(service.latitude,service.longitude));
 		}
 		this.map.fitBounds(bounds);
+	},
+
+	getRectangle : function (zoom, coordinate) {
+
+		/*
+		var rectangle = "{
+						topright : { lng : , lat : },
+						topleft : { lng : , lat : },
+						bottomright : { lng : , lat : },
+						bottomleft : { lng : , lat : },
+					}";*/
 	},
 	// to define, call to add action on click on marker
 	clickOnMarker : function (service) { }
