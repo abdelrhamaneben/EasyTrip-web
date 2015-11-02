@@ -70,3 +70,7 @@ body { height: 100%; margin: 0px; padding: 0px }
 #list_activities li:hover{
 	background-color:#1369B3;
 }
+
+.card {
+    
+}
