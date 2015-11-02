@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EasyTiip</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/result.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body onload="initialize()">
+     
+    <header class="text-center">
+        <div id="titre" class="col-md-offset-5">
+            <h1 class="text-center">EasyTrip</h1>
+        </div>
+    </header>
+    <!-- APP  -->
+    <div class="col-md-12" id="app">
+       
+        <!-- Right part (Activities bar)  -->
+        <section id="l-part" class="col-md-2 col-xs-12">
+            <h4>Choose your activities</h4>
+            <ul class="list-group" id="list_activities">
+              <!-- List of activities -->
+            </ul>
+        </section>
+        <!-- Center part (List of services) -->
+        <section id="c-part"class="col-md-5 col-xs-12" style="padding-top:150px;">
+           <div class="text-center">
+                <h5>Chargement des services ...</h5>
+                <i class="fa fa-spinner fa-spin fa-3x"></i>
+            </div>
+        </section>
+        <!-- Left part (Google map)  -->
+        <section id="r-part"class="col-md-5 col-xs-12">
+           <div id="map_canvas"></div>
+        </section>
+    </div>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/models/service.js"></script>
+    <script src="js/models/map_manager.js"></script>
+    <script src="js/models/activities_manager.js"></script>
+    <script type="text/javascript">
+       function initialize() {
+            // initialize Google Map and add marker
+            map_manager.init(50.62925,3.057256);
+            map_manager.addMarker({latitude : 50.6232523, longitude : 3.144265099999984, name : "sdsc"});
+            map_manager.addMarker({latitude : 50.654836, longitude : 3.073511000000053, name : "blablablabla"});
+            map_manager.resize();
+            map_manager.clickOnMarker = function (service) { alert(service.name);};
+
+            // initialize List of Activities
+            $.ajax({
+              method: "GET",
+              url: "http://localhost:1337/category/1",
+              async : false,
+              success : function (data) {
+                if(data.activities){
+                     init(data.activities);
+                   
+                }
+              },
+              error : function () {
+                console.log("failed");
+              }
+            });
+
+            function init(activities) {
+                activities_manager.init(activities);
+                activities_manager.clickOnActivity = clickOnActivity;
+            };
+            function clickOnActivity(id) { 
+                   activities_manager.getActivities();
+            };
+        }
+    </script>
+</body>
+
+</html>
