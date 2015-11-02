@@ -57,3 +57,18 @@
 .autosize:hover{
     opacity: 0.85
 }
+
+#titre {
+    color:#fed136;
+    padding:2px;
+    width:20%;
+    font-family: times;
+    font-style:italic;
+}
+
+header {
+    background-color:black;
+    margin:0px;
+    padding:5px;
+    margin-left:0px;
+}
