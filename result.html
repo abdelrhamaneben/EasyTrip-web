@@ -64,12 +64,11 @@
        function initialize() {
             // initialize Google Map and add marker
             map_manager.init(50.62925,3.057256);
-            map_manager.addMarker({latitude : 50.6232523, longitude : 3.144265099999984, name : "sdsc"});
-            map_manager.addMarker({latitude : 50.654836, longitude : 3.073511000000053, name : "blablablabla"});
+            map_manager.addMarker({latitude : 50.6232523, longitude : 3.144265099999984, name : "stella plage", description : "La plus belle plage de france, soleil et fille"});
+            map_manager.addMarker({latitude : 50.654836, longitude : 3.073511000000053, name : "Noeux-les-Mines ski", description : "Noeux-les-Mines sur piste artificielle"});
             map_manager.resize();
             map_manager.clickOnMarker = function (service) { 
                 console.log(this.map.getZoom());
-                alert(service.name);
             };
             services_manager.build();
             // initialize List of Activities
@@ -80,11 +79,10 @@
               success : function (data) {
                 if(data.activities){
                      init(data.activities);
-                   
                 }
               },
               error : function () {
-                console.log("failed");
+                alert("Impossible d'accéder au serveur EasyTrip");
               }
             });
 

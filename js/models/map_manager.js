@@ -46,7 +46,7 @@ var map_manager = {
 		    map: this.map
 		});
 		var infowindow = new google.maps.InfoWindow({
-		    content: service.name
+		    content: "<div><h1>" + service.name + "</h1><p>" + service.description + "<p/></div>"
 		});
 		marker.addListener('click', function() {
 			infowindow.open(this.map, marker);
@@ -82,6 +82,9 @@ var map_manager = {
 						bottomleft : { lng : centerLng - ecartLng, lat : centerLat - ecartLat}
 					};
 		console.log(rectangle);
+	},
+	displayService : function (annonce) {
+
 	},
 	// to define, call to add action on click on marker
 	clickOnMarker : function (service) { }
