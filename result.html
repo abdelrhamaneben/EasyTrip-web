@@ -68,31 +68,38 @@
        function initialize() {
             // ----------------  Initialize Services ----------------- (Service Controller)
             services_manager.load(null,[]);
-
+            services_manager.onClickService = function (service) {
+                map_manager.displayService(service);
+            };
             // ----------- initialize Google Map and add marker  ------- (Map Controller)
             map_manager.init(0,0);
             map_manager.loadMarker(services_manager.data);
             map_manager.resize();
 
             map_manager.onMapChanged(function () {
+                reload();
+            });
+
+            // define action Click on Marker map
+            map_manager.clickOnMarker = function (service) { 
+                $('.part h3').css('color','#333');
+                $('#service_' + service.id_service + ' h3').css('color','#AF2A47');
+            };
+
+            // -------------  initialize List of Activities  --------- (Activities Controller)
+            activities_manager.clickOnActivity = function (id) {
+                reload();
+            };
+
+            activities_manager.load();
+
+            function reload() {
                 var activities = activities_manager.getActivities();
                 var restangle = map_manager.getRectangle();
                 // NEED SEARCH 
                 services_manager.load(restangle,activities);
                 map_manager.loadMarker(services_manager.data);
-                map_manager.resize();
-            });
-
-            // define action Click on Marker map
-            map_manager.clickOnMarker = function (service) { 
-                
-            };
-
-            // -------------  initialize List of Activities  --------- (Activities Controller)
-            activities_manager.clickOnActivity = function (id) {
-
-            };
-            activities_manager.load();
+            }
         }
     </script>
 </body>

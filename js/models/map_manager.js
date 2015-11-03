@@ -31,6 +31,8 @@ var map_manager = {
 	// PARAMETERS
 	markers : [],
 	map : null,
+	resized : false,
+	infowindows : [],
 	// Initialisation Google map
 	init: function (longitude , latitude) {
 		this.markers = [];
@@ -49,7 +51,9 @@ var map_manager = {
 		var infowindow = new google.maps.InfoWindow({
 		    content: "<div><h1>" + service.name + "</h1><p>" + service.description + "<p/></div>"
 		});
+		this.infowindows.push(infowindow);
 		marker.addListener('click', function() {
+			map_manager.closeInfoWindow();
 			infowindow.open(this.map, marker);
 			map_manager.clickOnMarker(service);
 		});
@@ -61,14 +65,21 @@ var map_manager = {
 			this.markers[i].marker.setMap(null);
 		}
 	},
+	closeInfoWindow : function (){
+		for (var i = 0; i < this.infowindows.length; i++) {
+			this.infowindows[i].close();
+		}
+	},
 	//adapte le centre et le zoom selon les markers 
 	resize: function () {
+		this.resized = true;
 		var bounds 		= new google.maps.LatLngBounds();
 		for (var i = 0; i < this.markers.length; i++) {
 			var service = this.markers[i].service;
 			bounds.extend(new google.maps.LatLng(service.latitude,service.longitude));
 		}
 		this.map.fitBounds(bounds);
+		this.resized = false;
 	},
 	// retourne le rectangle de coordonnées de la map
 	getRectangle : function ( ) {
@@ -89,16 +100,20 @@ var map_manager = {
 	},
 	// définir l'action sur le mouvement de la carte
 	onMapChanged : function (callback) {
-		this.map.addListener('center_changed', callback);
+		//this.map.addListener('center_changed', callback);
 		this.map.addListener('bounds_changed', callback);
 	},
 	loadMarker : function (data){
 		for (var i = 0; i < data.length; i++) {
 			this.addMarker(data[i]);
 		}
-	}
-	displayService : function (annonce) {
-
+	},
+	displayService : function (service) {
+		for (var i = 0; i < this.markers.length; i++) {
+			if(this.markers[i].service.id_service == service.id_service) {
+				google.maps.event.trigger(this.markers[i].marker, 'click');
+			}
+		}
 	},
 	// to define, call to add action on click on marker
 	clickOnMarker : function (service) { }
