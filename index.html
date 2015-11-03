@@ -1,0 +1,77 @@
+<html lang=en>
+<head>
+	<!-- metadata -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EasyTrip</title>
+	
+	<!-- Bootstrap Core CSS -->
+    <link href="css\bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css\stylish-portfolio.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="css\font-awesome.min.css" rel="stylesheet" type="text/css">
+<style>
+    video { 
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+    .form-control-width {        
+        min-width: 0;
+        width: 22%;
+        display: inline;
+    }
+</style>
+<meta charset=utf-8>
+</head>
+<body>
+    <video autoplay loop poster="" id="bgvid">
+    <source src="videos\videoplayback.mp4" type="video/mp4">
+    </video>
+    <header id="top" class="header">
+        <div class="text-vertical-center" id="title">
+            <h1>EasyTrip</h1>
+            <br>
+            <input class="form-control form-control-width" id="city" placeholder="Tell us where you are"  type="text">
+            <br><br><a href="#" id="btnDisplayForm" class="btn btn-dark btn-md">We will tell you where to go</a>
+        </div>
+    </header>
+    
+    
+<script>
+    var video = document.getElementById("bgvid");
+    function vidFade() {
+      video.classList.add("stopfade");
+    }
+
+    video.addEventListener('ended', function()
+    {
+        // only functional if "loop" is removed 
+        video.pause();
+        vidFade();
+    }, false); 
+    video.play();
+
+</script>
+
+</body>
+   <!-- ----------SCRIPTS---------- --> 
+     <!-- Include Google Maps JS API -->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key= AIzaSyAyVD3_uVmC0hN-rYUCuzkjCeLrvHWUOBg"></script>
+
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script type="text/javascript" src="JS\autocomplete.js"></script>
+</html>
