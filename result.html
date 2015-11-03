@@ -25,7 +25,9 @@
 <body onload="initialize()">
      
     <header class="text-center">
+        <a href="index.html" style="float:left; color:white;">Retour</a>
         <div id="titre" class="col-md-offset-5">
+
             <h1 class="text-center">EasyTrip</h1>
         </div>
     </header>
@@ -89,6 +91,8 @@
             // -------------  initialize List of Activities  --------- (Activities Controller)
             activities_manager.clickOnActivity = function (id) {
                 reload();
+                $('.card').hide(350).show(300);
+
             };
 
             activities_manager.load();

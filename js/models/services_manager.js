@@ -7,7 +7,7 @@ var services_manager = {
            + "<div class=\"caption\">"
            + "<h3>" + item.name + "</h3>"
            + "<p>" + item.description + "</p>"
-           + "<p><a onclick='services_manager.click(\"service_" + item.id_service + "\");' class=\"btn btn-primary\" role=\"button\">Consulter</a></p>"
+           + "<p><a onclick='services_manager.click(\"service_" + item.id_service + "\");' class=\"btn btn-primary\" role=\"button\">Afficher</a></p>"
            + "</div>"
            + "</div>"
            + "</div>"));
