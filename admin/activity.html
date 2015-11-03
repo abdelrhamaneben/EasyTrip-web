@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EasyTiip</title>
+    <meta charset="utf8" />
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/result.css" rel="stylesheet">
+
+    <style type="text/css">  
+    </style>
+</head>
+
+<body onload="initialize()">
+  <header class="text-center">
+      <div id="titre" class="col-md-offset-5">
+         <h1 class="text-center">EasyTrip</h1>
+      </div>
+  </header>
+
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Espace administrateur
+                </a>
+            </li>
+            <li>
+                <a href="contact.html">Ajouter un contact</a>
+            </li>
+            <li>
+                <a href="service.html">Ajouter un service</a>
+            </li>
+            <li>
+                <a href="activity.html">Ajouter une activité</a>
+            </li>
+            <li>
+                <a href="category.html">Ajouter une categorie</a>
+            </li>
+        </ul>
+    </div>
+
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Masquer/Afficher le menu</a>
+
+    <div id="page-content-wrapper">
+
+      <div class="col-md-12">
+        <form role="form">
+          <div class="form-group">
+            <label for="activity_name">Nom:</label>
+            <input type="text" class="form-control" id="activity_name">
+          </div>
+          <div class="form-group">
+            <label for="activity_description">Description:</label>
+            <input type="text" class="form-control" id="activity_description">
+          </div>
+          <div class="form-group">
+            <label for="activity_category">Catégorie:</label>
+            <select class="form-control" id="activity_category">
+            </select>
+          </div>
+          <button type="submit" class="btn btn-default" id="submit">Ajouter</button>
+        </form>
+      </div>
+    </div>
+</div>
+
+ <script src="../js/jquery.js"></script>
+ <script src="../js/bootstrap.min.js"></script>
+ <script>
+    function initialize(){
+      activity_category = document.getElementById('activity_category');
+      $.ajax({
+              method: "GET",
+              url: "http://localhost:1337/category",
+              async : false,
+              dataType : "json",
+              contentType : "application/json",
+              success : function (data) {
+                for(var i= 0; i < data.length; i++){
+                    activity_category.options[activity_category.options.length] = new Option(data[i].name, data[i].id_category);
+                }
+              },
+              error : function () {
+                console.log("failed");
+              }
+            });
+    }
+
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#submit").click(function(e) {
+        e.preventDefault();
+        var activity_name = $("#activity_name").val();
+        var activity_description = $("#activity_description").val();
+        var activity_category = $("#activity_category").val();
+        var data = '{'
+          +'"categories" : "' + activity_category + '",'
+          +'"name" : "' + activity_name + '",'
+          +'"description" : "' + activity_description + '"'
+        +'}';
+
+        console.log(data);
+        $.ajax({
+              method : "POST",
+              url : "http://localhost:1337/activity",
+              data : data,
+              dataType : "json",
+              contentType : "application/json"
+        });
+    });
+ </script>
+</body>
+</html>
