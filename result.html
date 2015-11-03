@@ -56,43 +56,43 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Controller JS -->
     <script src="js/models/service.js"></script>
     <script src="js/models/map_manager.js"></script>
     <script src="js/models/activities_manager.js"></script>
     <script src="js/models/services_manager.js"></script>
+
+    <!-- APP -->
     <script type="text/javascript">
        function initialize() {
-            // initialize Google Map and add marker
-            map_manager.init(50.62925,3.057256);
-            map_manager.addMarker({latitude : 50.6232523, longitude : 3.144265099999984, name : "stella plage", description : "La plus belle plage de france, soleil et fille"});
-            map_manager.addMarker({latitude : 50.654836, longitude : 3.073511000000053, name : "Noeux-les-Mines ski", description : "Noeux-les-Mines sur piste artificielle"});
+            // ----------------  Initialize Services ----------------- (Service Controller)
+            services_manager.load(null,[]);
+
+            // ----------- initialize Google Map and add marker  ------- (Map Controller)
+            map_manager.init(0,0);
+            map_manager.loadMarker(services_manager.data);
             map_manager.resize();
-            map_manager.clickOnMarker = function (service) { 
-                console.log(this.map.getZoom());
-            };
-            services_manager.build();
-            // initialize List of Activities
-            $.ajax({
-              method: "GET",
-              url: "http://localhost:1337/category/1",
-              async : false,
-              success : function (data) {
-                if(data.activities){
-                     init(data.activities);
-                }
-              },
-              error : function () {
-                alert("Impossible d'accéder au serveur EasyTrip");
-              }
+
+            map_manager.onMapChanged(function () {
+                var activities = activities_manager.getActivities();
+                var restangle = map_manager.getRectangle();
+                // NEED SEARCH 
+                services_manager.load(restangle,activities);
+                map_manager.loadMarker(services_manager.data);
+                map_manager.resize();
             });
 
-            function init(activities) {
-                activities_manager.init(activities);
-                activities_manager.clickOnActivity = clickOnActivity;
+            // define action Click on Marker map
+            map_manager.clickOnMarker = function (service) { 
+                
             };
-            function clickOnActivity(id) { 
-                   activities_manager.getActivities();
+
+            // -------------  initialize List of Activities  --------- (Activities Controller)
+            activities_manager.clickOnActivity = function (id) {
+
             };
+            activities_manager.load();
         }
     </script>
 </body>

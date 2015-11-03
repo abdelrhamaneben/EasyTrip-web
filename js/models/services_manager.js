@@ -14,6 +14,29 @@ var services_manager = {
            + "</div>"));
  		});
  },
+ load : function (rectangle,activities) {
+   /* $.ajax({
+              method: "POST",
+              url: "http://localhost:1337/service/search",
+              async : false,
+              data : {
+                'rectangle' : rectangle,
+                'activities' : activities
+              },
+              success : function (data) {
+                if(data){
+                    this.data = data;
+                    this.build(this.data);
+                }
+              },
+              error : function () {
+                alert("Impossible d'accéder au serveur EasyTrip");
+              }
+            });*/
+    this.build(this.data);
+ }
+ ,
+ // Temporal data
  data : [
     {
         "activity": {
@@ -28,6 +51,8 @@ var services_manager = {
             "email": "kevin.once@cgi.com",
             "id_contact": 1
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "stella plage",
         "description": "stella plage",
         "image": "stella.jpg",
@@ -46,6 +71,8 @@ var services_manager = {
             "email": "abdelrhamane.benhammou@erdf-grdf.fr",
             "id_contact": 2
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "hardelot plage",
         "description": "hardelot plage",
         "image": "hardelot.jpg",
@@ -64,6 +91,8 @@ var services_manager = {
             "email": "abdelrhamane.benhammou@erdf-grdf.fr",
             "id_contact": 2
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "Le touquet",
         "description": "Le touquet",
         "image": "touquet.jpg",
@@ -82,6 +111,8 @@ var services_manager = {
             "email": "anis.tello@decathlon.com",
             "id_contact": 3
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "Noeux-les-Mines ski",
         "description": "Noeux-les-Mines sur piste artificielle",
         "image": "ski.jpg",
@@ -100,6 +131,8 @@ var services_manager = {
             "email": "anis.tello@decathlon.com",
             "id_contact": 3
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "Befroi de lille",
         "description": "Grand Befroi de lille",
         "image": "beffroi.jpg",
@@ -118,6 +151,8 @@ var services_manager = {
             "email": "kevin.once@cgi.com",
             "id_contact": 1
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "Musée de l'Hospice Comtesse - Lille",
         "description": "Musée de l'Hospice Comtesse - Lille",
         "image": "comtesse.jpg",
@@ -136,6 +171,8 @@ var services_manager = {
             "email": "kevin.once@cgi.com",
             "id_contact": 1
         },
+        "latitude" : 50.6232523,
+        "longitude" : 3.144265099999984,
         "name": "Maison natale Charles de Gaulle - Lille",
         "description": "Maison natale Charles de Gaulle - Lille",
         "image": "charles.jpg",
@@ -154,6 +191,8 @@ var services_manager = {
             "email": "abdelrhamane.benhammou@erdf-grdf.fr",
             "id_contact": 2
         },
+        "latitude" : 50.6242523,
+        "longitude" : 3.144165099999984,
         "name": "Musée des Canonniers Sédentaires de Lille",
         "description": "Musée des Canonniers Sédentaires de Lille",
         "image": "canon.jpg",
@@ -172,6 +211,8 @@ var services_manager = {
             "email": "abdelrhamane.benhammou@erdf-grdf.fr",
             "id_contact": 2
         },
+        "latitude" : 50.6332523,
+        "longitude" : 3.144275099999984,
         "name": "Musée des Moulins - Villeneuve d'Ascq",
         "description": "Musée des Moulins - Villeneuve d'Ascq",
         "image": "moulin.jpg",
@@ -190,6 +231,8 @@ var services_manager = {
             "email": "anis.tello@decathlon.com",
             "id_contact": 3
         },
+        "latitude" : 50.6222523,
+        "longitude" : 3.145265099999984,
         "name": "Musée de la poupée et du jouet ancien - Wambrechies",
         "description": "Musée de la poupée et du jouet ancien - Wambrechies",
         "image": "poupee.jpg",
