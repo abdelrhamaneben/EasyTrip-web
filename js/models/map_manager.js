@@ -2,6 +2,8 @@
 * This object manage the google map on the view
 */
 var map_manager = {
+
+	// la matrice donne l'ecart en degré entre le centre de la map et les bordures selon le Zoom
 	matrice : {
 	21 : { lat :0.001651    , lng:0.0039855 },
 	20 : { lat :0.003302    , lng:0.007971 },
@@ -29,6 +31,8 @@ var map_manager = {
 	// PARAMETERS
 	markers : [],
 	map : null,
+	resized : false,
+	infowindows : [],
 	// Initialisation Google map
 	init: function (longitude , latitude) {
 		this.markers = [];
@@ -37,7 +41,6 @@ var map_manager = {
         	center: new google.maps.LatLng(longitude, latitude),
         	mapTypeId: google.maps.MapTypeId.ROADMAP
     	});
-		this.getRectangle(this.map.getZoom(),this.map.getCenter());
 	},
 	// this function add a marker to google map
 	addMarker: function (service) {
@@ -48,7 +51,9 @@ var map_manager = {
 		var infowindow = new google.maps.InfoWindow({
 		    content: "<div><h1>" + service.name + "</h1><p>" + service.description + "<p/></div>"
 		});
+		this.infowindows.push(infowindow);
 		marker.addListener('click', function() {
+			map_manager.closeInfoWindow();
 			infowindow.open(this.map, marker);
 			map_manager.clickOnMarker(service);
 		});
@@ -60,31 +65,55 @@ var map_manager = {
 			this.markers[i].marker.setMap(null);
 		}
 	},
-	//adapte the map zoom
+	closeInfoWindow : function (){
+		for (var i = 0; i < this.infowindows.length; i++) {
+			this.infowindows[i].close();
+		}
+	},
+	//adapte le centre et le zoom selon les markers 
 	resize: function () {
-		var bounds = new google.maps.LatLngBounds();
+		this.resized = true;
+		var bounds 		= new google.maps.LatLngBounds();
 		for (var i = 0; i < this.markers.length; i++) {
 			var service = this.markers[i].service;
 			bounds.extend(new google.maps.LatLng(service.latitude,service.longitude));
 		}
 		this.map.fitBounds(bounds);
+		this.resized = false;
 	},
-
-	getRectangle : function (zoom, coordinate) {
-		var ecartLat = this.matrice[zoom].lat;
-		var ecartLng = this.matrice[zoom].lng;
-		var centerLat = coordinate.lat();
-		var centerLng = coordinate.lng();
-		var rectangle = {
+	// retourne le rectangle de coordonnées de la map
+	getRectangle : function ( ) {
+		var zoom 		= this.map.getZoom();
+		var coordinate 	= this.map.getCenter();
+		
+		var ecartLat 	= this.matrice[zoom].lat;
+		var ecartLng 	= this.matrice[zoom].lng;
+		var centerLat 	= coordinate.lat();
+		var centerLng 	= coordinate.lng();
+		var rectangle 	= {
 						topright : { lng : centerLng + ecartLng, lat : centerLat + ecartLat},
 						topleft : { lng : centerLng - ecartLng, lat : centerLat + ecartLat},
 						bottomright : { lng : centerLng + ecartLng, lat : centerLat - ecartLat},
 						bottomleft : { lng : centerLng - ecartLng, lat : centerLat - ecartLat}
 					};
-		console.log(rectangle);
+		return rectangle;
 	},
-	displayService : function (annonce) {
-
+	// définir l'action sur le mouvement de la carte
+	onMapChanged : function (callback) {
+		//this.map.addListener('center_changed', callback);
+		this.map.addListener('bounds_changed', callback);
+	},
+	loadMarker : function (data){
+		for (var i = 0; i < data.length; i++) {
+			this.addMarker(data[i]);
+		}
+	},
+	displayService : function (service) {
+		for (var i = 0; i < this.markers.length; i++) {
+			if(this.markers[i].service.id_service == service.id_service) {
+				google.maps.event.trigger(this.markers[i].marker, 'click');
+			}
+		}
 	},
 	// to define, call to add action on click on marker
 	clickOnMarker : function (service) { }

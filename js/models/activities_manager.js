@@ -28,6 +28,22 @@ var activities_manager = {
 		});
 		return list;
 	},
+	// get the list of activities and init the Html list
+	load : function () {
+		$.ajax({
+              method: "GET",
+              url: "http://localhost:1337/category/1",
+              async : false,
+              success : function (data) {
+                if(data.activities){
+                    this.init(data.activities);
+                }
+              },
+              error : function () {
+                alert("Impossible d'accéder au serveur EasyTrip");
+              }
+            });
+	},
 	// to define, call to add action on click on <li>
 	clickOnActivity : function (id) { }
 };
