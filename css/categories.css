@@ -10,7 +10,9 @@
 	right:20px;
 	top:30px;
 }
-
+.redBorder {
+    border:Apx solid red;
+}
 .title {
     background: #fed136;
     height: 50px;

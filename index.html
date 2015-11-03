@@ -101,6 +101,21 @@
             maxDuration : 0.7,
             viewportFactor : 0.2
         } );
+
+        $('.imgmenu a').click(function () {
+            var id = $(this).attr('data');
+            console.log(id);
+            var city = $('#city').val();
+            console.log(city);
+            /*if(city) {
+                localStorage.setItem("category", id);
+                localStorage.setItem("location", city);
+                $(location).attr('href',"result.html");
+            }else {
+                $('html,body').animate({'scrollTop' : 0},1000);
+               
+            }*/
+        });
     </script>
 
 </body>

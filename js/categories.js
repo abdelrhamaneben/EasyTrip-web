@@ -10,8 +10,7 @@ var categories = {
 			var template = this.TableTop;
 			for (i in this.data) {
 				var item = this.data[i];
-                var storage = "localStorage.setItem(\"category\", \" "+item.name+"\")"
-			  template += " <li> <div class='imgmenu mphotos-1 commune'> <a href='result.html' onClick='"+storage+"'> <div class='mphotos'> <div class='mphoto'> <img class='autosize' src='";
+			  template += " <li> <div class='imgmenu mphotos-1 commune' > <a href='result.html' data=\"" + item.id_category + "\"> <div class='mphotos'> <div class='mphoto'> <img class='autosize' src='";
                     if(item.img == null) {
                     	template += this.defaultImg;
                     }

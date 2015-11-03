@@ -30,20 +30,57 @@ var activities_manager = {
 	},
 	// get the list of activities and init the Html list
 	load : function () {
-		$.ajax({
+		this.init(this.data1);
+		/*$.ajax({
               method: "GET",
               url: "http://localhost:1337/category/1",
               async : false,
               success : function (data) {
                 if(data.activities){
-                    this.init(data.activities);
+                    
                 }
               },
               error : function () {
                 alert("Impossible d'accéder au serveur EasyTrip");
               }
-            });
+            });*/
 	},
 	// to define, call to add action on click on <li>
-	clickOnActivity : function (id) { }
+	clickOnActivity : function (id) { },
+	data1 : [
+        {
+            "name": "Festival",
+            "id_activity": 1
+        },
+        {
+            "name": "Concert",
+            "id_activity": 2
+        },
+        {
+            "name": "Opéra",
+            "id_activity": 3
+        },
+        {
+            "name": "Apprendre",
+            "id_activity": 4
+        }
+    ],
+    data2 : [
+        {
+            "name": "Massage",
+            "id_activity": 5
+        },
+        {
+            "name": "Yoga",
+            "id_activity": 6
+        },
+        {
+            "name": "Hammam",
+            "id_activity": 7
+        },
+        {
+            "name": "Spa",
+            "id_activity": 8
+        }
+    ]
 };

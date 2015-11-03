@@ -2,86 +2,107 @@ var categoryJson = {
     categories : [
 		{
 			img: "images/1.jpg",
-			name: "Culture"			
+			name: "Culture"	,
+			id_category : 5		
 		},
 		{
 			img: "images/3.jpg",
-			name: "gastronomy"
+			name: "gastronomy",
+			id_category : 7
 		},
 		{
 			img: "images/8.jpg",
-			name: "Beach"
+			name: "Beach",
+			id_category : 5	
 		},
         {
 			img: "images/6.jpg",
-			name: "Night"
+			name: "Night",
+			id_category : 5	
 		},
         {
 			img: "images/7.jpg",
-			name: "Music"
+			name: "Music",
+			id_category : 5	
 		},
         {
 			img: "images/10.jpg",
-			name: "Sports"
+			name: "Sports",
+			id_category : 5	
 		},
         {
 			img: "images/9.jpg",
-			name: "Relax"
+			name: "Relax",
+			id_category : 5	
 		},
         {
 			img: "images/2.jpg",
-			name: "Exploration"
+			name: "Exploration",
+			id_category : 7
 		},
         {
 			img: "images/11.jpg",
-			name: "Theme park"
+			name: "Theme park",
+			id_category : 5	
 		},
         {
 			img: "images/5.jpg",
-			name: "Mountain"
+			name: "Mountain",
+			id_category : 5	
 		},
         {
 			img: "images/4.jpg",
-			name: "Kids"
+			name: "Kids",
+			id_category : 5	
 		},
         {
 			img: "images/6.jpg",
-			name: "Night"
+			name: "Night",
+			id_category : 5	
 		},
         {
 			img: "images/7.jpg",
-			name: "Music"
+			name: "Music",
+			id_category : 5	
 		},
         {
 			img: "images/10.jpg",
-			name: "Sports"
+			name: "Sports",
+			id_category : 5	
 		},
         {
 			img: "images/2.jpg",
-			name: "Exploration"
+			name: "Exploration",
+			id_category : 5	
 		},
         {
 			img: "images/11.jpg",
-			name: "Theme park"
+			name: "Theme park",
+			id_category : 5	
 		},{
 			img: "images/1.jpg",
-			name: "Culture"			
+			name: "Culture",
+			id_category : 5		
 		},
 		{
 			img: "images/3.jpg",
-			name: "gastronomy"
+			name: "gastronomy",
+			id_category : 5	
 		},
 		{
 			img: "images/8.jpg",
-			name: "Beach"
+			name: "Beach",
+			id_category : 5	
 		},
         {
 			img: "images/6.jpg",
-			name: "Night"
+			name: "Night",
+			id_category : 5	
 		},
         {
 			img: "images/7.jpg",
-			name: "Music"
+			name: "Music",
+			id_category : 7
 		}
 	]
 }
