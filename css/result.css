@@ -15,7 +15,7 @@ html {
 }
 
 header {
-    background-color:black;
+    background-color:#fed136;
     margin:0px;
     padding:5px;
     margin-left:0px;
@@ -30,7 +30,7 @@ body { height: 100%; margin: 0px; padding: 0px }
 #map_canvas { height: 100% }
 
 #titre {
-    color:#fed136;
+    color:white;
     padding:2px;
     width:20%;
     font-family: times;
