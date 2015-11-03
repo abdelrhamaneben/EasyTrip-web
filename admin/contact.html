@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EasyTiip</title>
+    <meta charset="utf8" />
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/simple-sidebar.css" rel="stylesheet">
+    <link href="../css/result.css" rel="stylesheet">
+
+    <style type="text/css">  
+    </style>
+</head>
+
+<body>
+  <header class="text-center">
+      <div id="titre" class="col-md-offset-5">
+         <h1 class="text-center">EasyTrip</h1>
+      </div>
+  </header>
+
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Espace administrateur
+                </a>
+            </li>
+            <li>
+                <a href="contact.html">Ajouter un contact</a>
+            </li>
+            <li>
+                <a href="service.html">Ajouter un service</a>
+            </li>
+            <li>
+                <a href="activity.html">Ajouter une activité</a>
+            </li>
+            <li>
+                <a href="category.html">Ajouter une categorie</a>
+            </li>
+        </ul>
+    </div>
+
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Masquer/Afficher le menu</a>
+
+    <div id="page-content-wrapper">
+
+      <div class="col-md-12">
+        <form role="form">
+          <div class="form-group">
+            <label for="bu_last">Nom:</label>
+            <input type="text" class="form-control" id="bu_last">
+          </div>
+          <div class="form-group">
+            <label for="bu_first">Prénom:</label>
+            <input type="text" class="form-control" id="bu_first">
+          </div>
+
+          <div class="form-group">
+            <label for="bu_phone">Numéro de téléphone:</label>
+            <input type="text" class="form-control" id="bu_phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="bu_mail">Email:</label>
+            <input type="email" class="form-control" id="bu_mail">
+          </div>
+          
+
+          <button type="submit" class="btn btn-default" id="submit">Ajouter</button>
+        </form>
+      </div>
+    </div>
+</div>
+
+ <script src="../js/jquery.js"></script>
+ <script src="../js/bootstrap.min.js"></script>
+ <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $("#submit").click(function(e) {
+        e.preventDefault();
+        var bu_last = $("#bu_last").val();
+        var bu_first = $("#bu_first").val();
+        var bu_phone = $("#bu_phone").val();
+        var bu_mail = $("#bu_mail").val();
+        var data = '{'
+          +'"name_first" : "' + bu_first + '",'
+          +'"name_last" : "' + bu_last + '",'
+          +'"phone" : "' + bu_phone + '",'
+          +'"email" : "' + bu_mail + '"'
+        +'}';
+
+        console.log(data);
+        $.ajax({
+              method : "POST",
+              url : "http://localhost:1337/contact",
+              data : data,
+              dataType : "json",
+              contentType : "application/json"
+        });
+    });
+
+ </script>
+</body>
+</html>
