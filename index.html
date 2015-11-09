@@ -24,7 +24,7 @@
     <script src="js/modernizr.custom.js"></script>
     <style>
         video { 
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             min-width: 100%;
@@ -56,15 +56,16 @@
             <a href="#" id="btnDisplayForm" class="btn btn-dark btn-md">We will tell you where to go</a></
         </div>
     </header>
-    <div class="container animsition">
-            <center>                
-                <h4 style="margin-bottom:20px;">What do you want to do?</h4>
-                <h4 style="color:black;text-decoration:underline;">Choose a category to begin the experience</h4>
+    <div class="container animsition" id="afterSelectingCity">
+            <center>
+				<br><br>
+                <!-- h4 style="margin-bottom:20px;">What do you want to do?</h4-->
+                <h3 style="color:#fed136;text-decoration:underline;">Choose a category to begin the experience</h3>
                 
                 <ul class="grid effect-5" id="grid">                
                 </ul>
             </center>            
-        </div>
+    </div>
     <script src="js/jquery.js"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/imagesloaded.js"></script>
@@ -115,6 +116,12 @@
                 $('html,body').animate({'scrollTop' : 0},1000);
                
             }*/
+        });
+		
+		$('#btnDisplayForm').click(function (){
+            $('html, body').animate({
+			 scrollTop: $('#afterSelectingCity').offset().top
+            }, 1000);
         });
     </script>
 
